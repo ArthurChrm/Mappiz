@@ -28,6 +28,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.chart.PieChart.Data;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
@@ -113,7 +114,15 @@ public class AccueilController {
 
 		}
 
-		btnJouer.setDisable(Theme.listerLesThemes().length == 0);
+		if (Theme.listerLesThemes().length == 0) {
+			btnJouer.setDisable(true);
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Aucun thème disponible");
+			alert.setHeaderText("Erreur");
+			alert.setContentText("Aucun thème n'est présent dans le dossier des thèmes. Vous ne pouvez pas jouer.");
+
+			alert.showAndWait();
+		}
 	}
 
 	@FXML
