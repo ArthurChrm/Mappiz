@@ -1,0 +1,45 @@
+#btn-ok {
+	-fx-font-family: 'Calibri';
+	-fx-font-weight: bold;
+	-fx-font-size: 20px;
+	-fx-text-alignment: center;
+    -fx-base: #22a6b3;
+	-fx-text-fill: #FFFFFF;
+}
+
+#btn-ok-petit {
+	-fx-font-family: 'Calibri';
+	-fx-font-weight: bold;
+	-fx-font-size: 15px;
+	-fx-text-alignment: center;
+    -fx-base: #22a6b3;
+	-fx-text-fill: #FFFFFF;
+}
+
+#btn-negatif {
+	-fx-font-family: 'Calibri';
+	-fx-font-weight: bold;
+	-fx-font-size: 20px;
+	-fx-text-alignment: center;
+    -fx-base: #eb4d4b;
+	-fx-text-fill: #FFFFFF;
+}
+
+#btn-negatif-petit {
+	-fx-font-family: 'Calibri';
+	-fx-font-weight: bold;
+	-fx-font-size: 15px;
+	-fx-text-alignment: center;
+    -fx-base: #eb4d4b;
+	-fx-text-fill: #FFFFFF;
+}
+
+.tooltip {
+	-fx-background: rgba(100,30,30);
+    -fx-text-fill: black;
+    -fx-background-color: white;
+    -fx-background-radius: 6px;
+    -fx-background-insets: 0;
+    -fx-padding: 0.667em 0.75em 0.667em 0.75em; /* 10px */
+    -fx-font-size: 0.85em;
+}

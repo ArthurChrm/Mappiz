@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane minHeight="0.0" minWidth="0.0" prefHeight="545.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.affichage_score.ScoreController">
+   <top>
+      <VBox BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets top="15.0" />
+         </BorderPane.margin>
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label text="Fin de partie" textAlignment="CENTER">
+                     <font>
+                        <Font name="Calibri" size="40.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <Separator prefWidth="200.0">
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Separator>
+         </children>
+      </VBox>
+   </top>
+   <bottom>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button id="btn-ok" fx:id="retourAccueil" alignment="CENTER" mnemonicParsing="false" onAction="#clicBtnRetournerALAccueil" stylesheets="@../application.css" text="RETOURNER À L'ACCUEIL" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets bottom="5.0" />
+               </GridPane.margin>
+            </Button>
+            <Button id="btn-negatif" fx:id="btnQuitter" maxWidth="236.0" minWidth="236.0" mnemonicParsing="false" onAction="#clicBtnQuitter" prefWidth="236.0" stylesheets="@../application.css" text="QUITTER" textFill="WHITE" GridPane.halignment="LEFT" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets bottom="5.0" />
+               </GridPane.margin>
+            </Button>
+            <GridPane GridPane.columnIndex="1">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+            </GridPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+      </GridPane>
+   </bottom>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="VOTRE SCORE">
+               <font>
+                  <Font name="Calibri" size="35.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="lblScore" text="17/20">
+               <font>
+                  <Font name="Calibri" size="35.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblMessageRelatifAuScore" text="Bravo !">
+               <font>
+                  <Font name="Calibri Italic" size="35.0" />
+               </font>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </Label>
+            <Label fx:id="lblNbQuestionsCorrectementRepondues" text="Vous avez répondu correctement à 0 questions sur un total de 0." textAlignment="CENTER">
+               <font>
+                  <Font name="Calibri Italic" size="23.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

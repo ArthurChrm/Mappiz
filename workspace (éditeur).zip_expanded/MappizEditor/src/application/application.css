@@ -1,0 +1,35 @@
+#btn-ok {
+	-fx-font-family: 'Calibri';
+	-fx-font-weight: bold;
+	-fx-font-size: 20px;
+	-fx-text-alignment: center;
+    -fx-base: #22a6b3;
+	-fx-text-fill: #FFFFFF;
+}
+
+#btn-ok-petit {
+	-fx-font-family: 'Calibri';
+	-fx-font-weight: bold;
+	-fx-font-size: 15px;
+	-fx-text-alignment: center;
+    -fx-base: #22a6b3;
+	-fx-text-fill: #FFFFFF;
+}
+
+#btn-negatif {
+	-fx-font-family: 'Calibri';
+	-fx-font-weight: bold;
+	-fx-font-size: 20px;
+	-fx-text-alignment: center;
+    -fx-base: #eb4d4b;
+	-fx-text-fill: #FFFFFF;
+}
+
+#btn-negatif-petit {
+	-fx-font-family: 'Calibri';
+	-fx-font-weight: bold;
+	-fx-font-size: 15px;
+	-fx-text-alignment: center;
+    -fx-base: #eb4d4b;
+	-fx-text-fill: #FFFFFF;
+}
