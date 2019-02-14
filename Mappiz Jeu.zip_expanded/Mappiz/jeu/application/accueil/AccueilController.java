@@ -59,7 +59,7 @@ public class AccueilController {
 
 	@FXML
 	private Button btnQuitter;
-	
+
 	@FXML
 	private Button btnEditeur;
 
@@ -122,7 +122,9 @@ public class AccueilController {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Aucun thème disponible");
 			alert.setHeaderText("Erreur");
-			alert.setContentText("Aucun thème n'est présent dans le dossier des thèmes. Vous ne pouvez pas jouer.\n\nLe dossier des thèmes se trouve à l'emplacement : "+Theme.getUrlDossierDesThemes());
+			alert.setContentText(
+					"Aucun thème n'est présent dans le dossier des thèmes. Vous ne pouvez pas jouer.\n\nLe dossier des thèmes se trouve à l'emplacement : "
+							+ Theme.getUrlDossierDesThemes());
 
 			alert.showAndWait();
 		}
@@ -187,13 +189,14 @@ public class AccueilController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@FXML
 	private void clicEditeur(ActionEvent event) {
-		
+		System.out.println("Clic éditeur");
 	}
 
-	public void clicParametres() {
+	@FXML
+	private void clicParametres() {
 
 		try {
 

@@ -12,10 +12,10 @@ import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
-import application.Question;
-import application.Theme;
-import application.Utile;
-import application.accueil.AccueilController;
+import application.Question_Editeur;
+import application.Theme_Editeur;
+import application.Utile_Editeur;
+import application.accueil.AccueilController_Editeur;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -118,7 +118,7 @@ public class CreationModifQuestionsController {
 
 	@FXML
 	private void initialize() throws IOException {
-		Utile.setNbCaracteresMaxDansUnChamp(textFIntituleQuestion, 100);
+		Utile_Editeur.setNbCaracteresMaxDansUnChamp(textFIntituleQuestion, 100);
 
 		// On paramètre l'image de fond des boutons "Ajouter une question" et
 		// "Supprimer une question"
@@ -152,12 +152,12 @@ public class CreationModifQuestionsController {
 		// création du thème sont affectées aux variables de la classe actuelle.
 		this.nomDuTheme = nomDuTheme;
 
-		Question.setUrlDossierDesThemes(Theme.getUrlDossierDesThemes());
+		Question_Editeur.setUrlDossierDesThemes(Theme_Editeur.getUrlDossierDesThemes());
 
 		if (mode == 0) {
 			System.out.println("Mode création.");
 			// On crée le dossier de la première question
-			Question.ajouterUneQuestion(nomDuTheme);
+			Question_Editeur.ajouterUneQuestion(nomDuTheme);
 			// Ajout d'une question, car il y en a au moins une
 			ajouterUneQuestion();
 			// Ajout d'une première proposition de réponse "A", car il y en a au
@@ -178,9 +178,9 @@ public class CreationModifQuestionsController {
 		if (mode == 1) {
 			System.out.println("Mode modification.");
 
-			Question.setNomDuTheme(nomDuTheme);
+			Question_Editeur.setNomDuTheme(nomDuTheme);
 			premierAjoutDeLancement = false;
-			File[] dossiersQuestions = Question.listerQuestionsTheme(nomDuTheme);
+			File[] dossiersQuestions = Question_Editeur.listerQuestionsTheme(nomDuTheme);
 			nbQuestions = dossiersQuestions.length;
 			for (int i = 1; i <= nbQuestions; i++) {
 				Button btnQuestion = new Button(String.valueOf(i));
@@ -219,13 +219,13 @@ public class CreationModifQuestionsController {
 					try {
 						enregistrerFichiersQuestion();
 
-						String dossierDuTheme = Theme.getUrlDossierDesThemes() + "/" + nomDuTheme;
+						String dossierDuTheme = Theme_Editeur.getUrlDossierDesThemes() + "/" + nomDuTheme;
 
 						// On demande une confirmation à l'utilisateur
 						String phrase = "Souhaitez-vous vraiment terminer la " + (mode == 0 ? "création" : "modification") + " de ce thème et quitter l'application ?\nIl est enregistré dans le dossier " + (new File(dossierDuTheme).getPath()) + ".";
 
 						// S'il souhaite quitter...
-						if (!Utile.afficherDialogueDeConfirmation("", "Terminé ?", phrase, "Oui", "Non")) {
+						if (!Utile_Editeur.afficherDialogueDeConfirmation("", "Terminé ?", phrase, "Oui", "Non")) {
 							event.consume();
 						}
 					} catch (IOException e) {
@@ -234,14 +234,14 @@ public class CreationModifQuestionsController {
 				} else {
 					event.consume();
 					String phrase = "Le thème ne peut être enregistré que s'il est valide.\nQue voulez-vous faire ?";
-					if (!Utile.afficherDialogueDeConfirmation("", "Que voulez-vous faire ?", phrase, "Poursuivre la " + (mode == 0 ? "création" : "modification") + " du thème", "Supprimer le thème et quitter", 550)) {
+					if (!Utile_Editeur.afficherDialogueDeConfirmation("", "Que voulez-vous faire ?", phrase, "Poursuivre la " + (mode == 0 ? "création" : "modification") + " du thème", "Supprimer le thème et quitter", 550)) {
 						// S'il souhaite supprimer le thème...
-						if (Utile.afficherDialogueDeConfirmation("", "Supprimer le thème ?", "Souhaitez-vous vraiment supprimer le thème nommé \"" + nomDuTheme + "\" ?", "Oui", "Non")) {
-							if (!Theme.supprimerUnTheme(nomDuTheme)) {
-								File dossierDuThemeASupprimer = new File(Theme.getUrlDossierDesThemes() + "/" + nomDuTheme);
+						if (Utile_Editeur.afficherDialogueDeConfirmation("", "Supprimer le thème ?", "Souhaitez-vous vraiment supprimer le thème nommé \"" + nomDuTheme + "\" ?", "Oui", "Non")) {
+							if (!Theme_Editeur.supprimerUnTheme(nomDuTheme)) {
+								File dossierDuThemeASupprimer = new File(Theme_Editeur.getUrlDossierDesThemes() + "/" + nomDuTheme);
 								if (dossierDuThemeASupprimer.exists()) {
 									String phrase1 = "La suppression du thème a échoué. Vous pouvez essayer de le supprimer manuellement, en supprimant le dossier situé à l'URL \"" + dossierDuThemeASupprimer.getPath() + "\".\nSouhaitez-vous que l'explorateur de fichiers pour tenter de supprimer le dossier ?";
-									if (Utile.afficherDialogueDeConfirmation("", "Échec de la suppression !", phrase1, "Oui", "Non")) {
+									if (Utile_Editeur.afficherDialogueDeConfirmation("", "Échec de la suppression !", phrase1, "Oui", "Non")) {
 										try {
 											Runtime.getRuntime().exec("explorer.exe /select," + dossierDuThemeASupprimer.getPath());
 										} catch (IOException e) {
@@ -249,7 +249,7 @@ public class CreationModifQuestionsController {
 										}
 									}
 								} else {
-									Utile.afficherDialogueDInformation("", "Erreur lors de la suppression !", "Une erreur s'est produit lors de la suppression du thème.", AlertType.ERROR);
+									Utile_Editeur.afficherDialogueDInformation("", "Erreur lors de la suppression !", "Une erreur s'est produit lors de la suppression du thème.", AlertType.ERROR);
 								}
 							}
 							Platform.exit();
@@ -291,7 +291,7 @@ public class CreationModifQuestionsController {
 	}
 
 	private void ajouterUneReponse() {
-		if (reponseValide(true) && nbReponses < Theme.getNbMaxDeReponses()) {
+		if (reponseValide(true) && nbReponses < Theme_Editeur.getNbMaxDeReponses()) {
 			// Ajout du polygone associé à la réponse
 			Polygon polygon = new Polygon();
 			polygonesDesReponses.add(polygon);
@@ -301,7 +301,7 @@ public class CreationModifQuestionsController {
 			// On sélectionne la réponse
 			listVReponses.getSelectionModel().select(nbReponses - 1);
 			// On gère l'activation ou non des boutons "ajouter" et "supprimer"
-			if (nbReponses == Theme.getNbMaxDeReponses())
+			if (nbReponses == Theme_Editeur.getNbMaxDeReponses())
 				btnAjouterUneReponse.setDisable(true);
 			btnSupprimerLaReponse.setDisable(false);
 		}
@@ -355,7 +355,7 @@ public class CreationModifQuestionsController {
 		if (nbQuestions > 1) {
 			btnBarQuestions.getButtons().remove(questionSelectionnee - 1);
 			nbQuestions--;
-			Question.supprimerUneQuestion(questionSelectionnee);
+			Question_Editeur.supprimerUneQuestion(questionSelectionnee);
 			// Renuméroter les boutons
 			int compteur = 1;
 			for (Node myNode : btnBarQuestions.getButtons())
@@ -376,7 +376,7 @@ public class CreationModifQuestionsController {
 				selectionnerUneQuestion(questionSelectionnee, false, true);
 			}
 		} else {
-			Utile.afficherDialogueDInformation("", "Suppression impossible !", "Vous ne pouvez pas supprimer cette question, car le thème doit contenir au moins une question pour être valide !", AlertType.ERROR);
+			Utile_Editeur.afficherDialogueDInformation("", "Suppression impossible !", "Vous ne pouvez pas supprimer cette question, car le thème doit contenir au moins une question pour être valide !", AlertType.ERROR);
 		}
 	}
 
@@ -385,8 +385,8 @@ public class CreationModifQuestionsController {
 		if (!premierAjoutDeLancement) {
 			boolean questionValide = questionValide();
 			if (questionValide) {
-				if (nbQuestions < Theme.getNbMaxDeQuestions()) {
-					Question.ajouterUneQuestion(nomDuTheme);
+				if (nbQuestions < Theme_Editeur.getNbMaxDeQuestions()) {
+					Question_Editeur.ajouterUneQuestion(nomDuTheme);
 					nbQuestions++;
 					Button btnQuestion = new Button(String.valueOf(nbQuestions));
 					btnQuestion.setOnAction(event -> {
@@ -403,8 +403,8 @@ public class CreationModifQuestionsController {
 					scrollPQuestions.layout();
 					scrollPQuestions.setHvalue(1);
 				} else {
-					String phrase = "Vous ne pouvez plus ajouter de question, car vous avez atteint le nombre maximal de " + Theme.getNbMaxDeQuestions() + " questions fixé dans les paramètres de l'application !";
-					Utile.afficherDialogueDInformation("", "Ajout impossible !", phrase, AlertType.ERROR);
+					String phrase = "Vous ne pouvez plus ajouter de question, car vous avez atteint le nombre maximal de " + Theme_Editeur.getNbMaxDeQuestions() + " questions fixé dans les paramètres de l'application !";
+					Utile_Editeur.afficherDialogueDInformation("", "Ajout impossible !", phrase, AlertType.ERROR);
 				}
 			}
 		} else {
@@ -502,7 +502,7 @@ public class CreationModifQuestionsController {
 			questionValide = false;
 		}
 		if (!questionValide) {
-			Utile.afficherDialogueDInformation("", "Question incorrecte !", phraseDErreur, AlertType.ERROR);
+			Utile_Editeur.afficherDialogueDInformation("", "Question incorrecte !", phraseDErreur, AlertType.ERROR);
 		}
 		return questionValide;
 	}
@@ -511,7 +511,7 @@ public class CreationModifQuestionsController {
 		if (!afficherErreurPolygoneInvalide) {
 			if (afficherDialogue) {
 				String phrase = "Les segments du polygone ne doivent pas se croiser. Poursuivez le traçage du polygone de sorte à éliminer les intersections, ou recommencez le traçage en cliquant sur \"Refaire le traçage\".";
-				Utile.afficherDialogueDInformation("", "Polygone invalide !", phrase, AlertType.ERROR);
+				Utile_Editeur.afficherDialogueDInformation("", "Polygone invalide !", phrase, AlertType.ERROR);
 			}
 			return false;
 		}
@@ -541,7 +541,7 @@ public class CreationModifQuestionsController {
 					if (afficherErreurPolygoneInvalide) {
 						if (!nePlusAfficherErreurPolygoneInvalide) {
 							String phrase = "Les segments du polygone ne doivent pas se croiser. Poursuivez le traçage du polygone de sorte à éliminer les intersections, ou recommencez le traçage en cliquant sur \"Refaire le traçage\".";
-							Utile.afficherDialogueDInformationAvecCheckBox("", "Polygone invalide !", phrase, AlertType.ERROR, "Ne plus afficher", param -> {
+							Utile_Editeur.afficherDialogueDInformationAvecCheckBox("", "Polygone invalide !", phrase, AlertType.ERROR, "Ne plus afficher", param -> {
 								nePlusAfficherErreurPolygoneInvalide = param;
 							});
 						}
@@ -553,14 +553,14 @@ public class CreationModifQuestionsController {
 				}
 			}
 		} else {
-			Utile.afficherDialogueDInformation("", "Question incorrecte !", "Avant de tracer un polygone de proposition de réponse, vous devez ajouter une image à la question. Pour cela, cliquez sur le bouton \"...\".", AlertType.ERROR);
+			Utile_Editeur.afficherDialogueDInformation("", "Question incorrecte !", "Avant de tracer un polygone de proposition de réponse, vous devez ajouter une image à la question. Pour cela, cliquez sur le bouton \"...\".", AlertType.ERROR);
 		}
 	}
 
 	private void enregistrerFichiersQuestion() throws IOException {
 		System.out.println("Enregistrement... START");
 
-		String dossierQuestion = Theme.getUrlDossierDesThemes() + "/" + nomDuTheme + "/" + questionSelectionnee;
+		String dossierQuestion = Theme_Editeur.getUrlDossierDesThemes() + "/" + nomDuTheme + "/" + questionSelectionnee;
 		File fileImageSource = new File(urlImageQuestion);
 		File fileImageDestination = new File(dossierQuestion + "\\image.png");
 
@@ -574,10 +574,10 @@ public class CreationModifQuestionsController {
 
 		// On enregistre l'intitulé de la question
 		// On créée le fichier
-		Utile.enregistrerFichier(dossierQuestion + "/intitule.txt", textFIntituleQuestion.getText());
+		Utile_Editeur.enregistrerFichier(dossierQuestion + "/intitule.txt", textFIntituleQuestion.getText());
 
 		// On enregistre le numéro de la réponse correcte
-		Utile.enregistrerFichier(dossierQuestion + "/numReponseCorrecte.txt", String.valueOf(numeroBonneReponse));
+		Utile_Editeur.enregistrerFichier(dossierQuestion + "/numReponseCorrecte.txt", String.valueOf(numeroBonneReponse));
 
 		String polygonesStr = "";
 		for (Polygon monPolygone : polygonesDesReponses) {
@@ -590,7 +590,7 @@ public class CreationModifQuestionsController {
 			polygonesStr += "$" + points;
 		}
 
-		Utile.enregistrerFichier(dossierQuestion + "/coord.txt", polygonesStr);
+		Utile_Editeur.enregistrerFichier(dossierQuestion + "/coord.txt", polygonesStr);
 		System.out.println("Enregistrement... END");
 	}
 
@@ -623,8 +623,8 @@ public class CreationModifQuestionsController {
 			// On créée le polygone par défaut
 			polygonesDesReponses.add(new Polygon());
 		} else {
-			Question question = new Question();
-			Question.setUrlDossierDesThemes(Theme.getUrlDossierDesThemes());
+			Question_Editeur question = new Question_Editeur();
+			Question_Editeur.setUrlDossierDesThemes(Theme_Editeur.getUrlDossierDesThemes());
 			if (question.load(numQuestion, true)) {
 				// On agit sur les variables
 				numeroReponseSelectionnee = 1;
@@ -652,7 +652,7 @@ public class CreationModifQuestionsController {
 				BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
 				paneImageQuestion.setBackground(new Background(new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, bSize)));
 				// On active les boutons "ajouter" et "supprimer la réponse"
-				btnAjouterUneReponse.setDisable(nbReponses == Theme.getNbMaxDeReponses());
+				btnAjouterUneReponse.setDisable(nbReponses == Theme_Editeur.getNbMaxDeReponses());
 				btnSupprimerLaReponse.setDisable(nbReponses == 1);
 				// On met à jour l'activation du bouton "effacer le traçage"
 				Polygon polygoneReponse1 = polygonesDesReponses.get(0);
@@ -711,13 +711,13 @@ public class CreationModifQuestionsController {
 			try {
 				enregistrerFichiersQuestion();
 
-				String dossierDuTheme = Theme.getUrlDossierDesThemes() + "/" + nomDuTheme;
+				String dossierDuTheme = Theme_Editeur.getUrlDossierDesThemes() + "/" + nomDuTheme;
 
 				// On demande une confirmation à l'utilisateur
 				String phrase = "Souhaitez-vous vraiment terminer la " + (mode == 0 ? "création" : "modification") + " de ce thème ?\nIl est enregistré dans le dossier " + (new File(dossierDuTheme).getPath()) + ".";
 
 				// S'il souhaite quitter...
-				if (Utile.afficherDialogueDeConfirmation("", "Terminé ?", phrase, "Oui", "Non")) {
+				if (Utile_Editeur.afficherDialogueDeConfirmation("", "Terminé ?", phrase, "Oui", "Non")) {
 					retournerALAccueil();
 				}
 			} catch (IOException e) {
@@ -789,7 +789,7 @@ public class CreationModifQuestionsController {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/accueil/InterfaceAccueil.fxml"));
 			Parent root = (Parent) loader.load();
-			AccueilController controller = (AccueilController) loader.getController();
+			AccueilController_Editeur controller = (AccueilController_Editeur) loader.getController();
 			controller.setStage(stage);
 
 			// Création de la scène

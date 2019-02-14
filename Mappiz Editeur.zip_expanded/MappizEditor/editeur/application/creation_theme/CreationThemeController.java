@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.UnaryOperator;
 
-import application.Question;
-import application.Theme;
-import application.Utile;
-import application.accueil.AccueilController;
+import application.Question_Editeur;
+import application.Theme_Editeur;
+import application.Utile_Editeur;
+import application.accueil.AccueilController_Editeur;
 import application.creation_modif_questions.CreationModifQuestionsController;
-import application.selection_theme.SelectionThemeController;
+import application.selection_theme.SelectionThemeController_Editeur;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -84,7 +84,7 @@ public class CreationThemeController {
 
 	@FXML
 	private void initialize() {
-		Utile.setNbCaracteresMaxDansUnChamp(textFNomDuTheme, 100);
+		Utile_Editeur.setNbCaracteresMaxDansUnChamp(textFNomDuTheme, 100);
 	}
 
 	public void setStage(Stage stage) {
@@ -92,7 +92,7 @@ public class CreationThemeController {
 
 		stage.setOnCloseRequest(event -> {
 			if (stage.getTitle().startsWith("Mappiz Editor - Création d'un thème") || stage.getTitle().startsWith("Mappiz Editor - Modification d'un thème")) {
-				if (Utile.afficherDialogueDeConfirmation("", "Quitter ?", "Souhaitez-vous vraiment annuler la " + (mode == 0 ? "création" : "modification") + " de ce thème et quitter l'application ?", "Oui", "Non")) {
+				if (Utile_Editeur.afficherDialogueDeConfirmation("", "Quitter ?", "Souhaitez-vous vraiment annuler la " + (mode == 0 ? "création" : "modification") + " de ce thème et quitter l'application ?", "Oui", "Non")) {
 					Platform.exit();
 					System.exit(0);
 				} else {
@@ -121,11 +121,11 @@ public class CreationThemeController {
 		boolean nomValide = true;
 
 		if (textFNomDuTheme.getText().isEmpty()) {
-			Utile.afficherDialogueDInformation("", "Information manquante !", "Vous devez donner un nom au thème.", AlertType.WARNING);
+			Utile_Editeur.afficherDialogueDInformation("", "Information manquante !", "Vous devez donner un nom au thème.", AlertType.WARNING);
 			nomValide = false;
 		} else {
-			if ((Theme.existe(textFNomDuTheme.getText()) && mode == 0) || (Theme.existe(textFNomDuTheme.getText(), nomDuTheme) && mode == 1)) {
-				Utile.afficherDialogueDInformation("", "Nom déjà utilisé !", "Un autre thème porte déjà ce nom. Vous devez en donner un autre.", AlertType.WARNING);
+			if ((Theme_Editeur.existe(textFNomDuTheme.getText()) && mode == 0) || (Theme_Editeur.existe(textFNomDuTheme.getText(), nomDuTheme) && mode == 1)) {
+				Utile_Editeur.afficherDialogueDInformation("", "Nom déjà utilisé !", "Un autre thème porte déjà ce nom. Vous devez en donner un autre.", AlertType.WARNING);
 				nomValide = false;
 			}
 		}
@@ -138,21 +138,21 @@ public class CreationThemeController {
 				// le fichier "params.ini"
 				if (mode == 0) {
 					nomDuTheme = textFNomDuTheme.getText();
-					Theme.ajouterUnTheme(nomDuTheme);
+					Theme_Editeur.ajouterUnTheme(nomDuTheme);
 					stage.setTitle(stage.getTitle() + " (" + nomDuTheme + ")");
 				} else if (mode == 1) {
 					if (!nomDuTheme.equals(textFNomDuTheme.getText())) {
 
-						Theme.renommer(nomDuTheme, textFNomDuTheme.getText());
+						Theme_Editeur.renommer(nomDuTheme, textFNomDuTheme.getText());
 						nomDuTheme = textFNomDuTheme.getText();
 						stage.setTitle("Mappiz Editor - Modification d'un thème (" + nomDuTheme + ")");
 					}
 				}
 
-				Utile.enregistrerFichier(Theme.getUrlDossierDesThemes() + "/" + nomDuTheme + "/description.txt", textADescription.getText());
+				Utile_Editeur.enregistrerFichier(Theme_Editeur.getUrlDossierDesThemes() + "/" + nomDuTheme + "/description.txt", textADescription.getText());
 
 				if (new File(textFURLDeLImage.getText()).exists()) {
-					String urlDossierDuTheme = Theme.getUrlDossierDesThemes() + "/" + nomDuTheme;
+					String urlDossierDuTheme = Theme_Editeur.getUrlDossierDesThemes() + "/" + nomDuTheme;
 					File fileImageSource = new File(textFURLDeLImage.getText());
 					File fileImageDestination = new File(urlDossierDuTheme + "/" + "miniature.png");
 
@@ -207,12 +207,12 @@ public class CreationThemeController {
 		if (mode == 1) {
 			labelTitre.setText("Modification d'un thème");
 			// On charge les informations principales du thème (la description)
-			Theme.load(nomDuTheme);
+			Theme_Editeur.load(nomDuTheme);
 			// On affiche la description du thème dans la TextArea
-			textADescription.setText(Theme.getDescription());
+			textADescription.setText(Theme_Editeur.getDescription());
 			// On affiche la miniature du thème dans le Pane et l'URL de la
 			// miniature dans le TextField
-			File miniature = new File(Theme.getUrlDossierDesThemes() + "/" + nomDuTheme + "/miniature.png");
+			File miniature = new File(Theme_Editeur.getUrlDossierDesThemes() + "/" + nomDuTheme + "/miniature.png");
 			if (miniature.exists() && miniature.isFile()) {
 				afficherMiniature(miniature);
 			}
@@ -222,12 +222,12 @@ public class CreationThemeController {
 	@FXML
 	private void clickBtnRetour() {
 		// On demande une confirmation à l'utilisateur
-		if (Utile.afficherDialogueDeConfirmation("", "Annuler ?", "Souhaitez-vous vraiment annuler la " + (mode == 0 ? "création" : "modification") + " de ce thème ?", "Oui", "Non")) {
+		if (Utile_Editeur.afficherDialogueDeConfirmation("", "Annuler ?", "Souhaitez-vous vraiment annuler la " + (mode == 0 ? "création" : "modification") + " de ce thème ?", "Oui", "Non")) {
 			try {
 				if (mode == 0) {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/accueil/InterfaceAccueil.fxml"));
 					Parent root = (Parent) loader.load();
-					AccueilController controller = (AccueilController) loader.getController();
+					AccueilController_Editeur controller = (AccueilController_Editeur) loader.getController();
 					stage.setTitle("Mappiz Editor");
 					controller.setStage(stage);
 
@@ -243,7 +243,7 @@ public class CreationThemeController {
 				} else {
 					FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/selection_theme/InterfaceSelectionTheme.fxml"));
 					Parent root = (Parent) loader.load();
-					SelectionThemeController controller = (SelectionThemeController) loader.getController();
+					SelectionThemeController_Editeur controller = (SelectionThemeController_Editeur) loader.getController();
 					stage.setTitle("Mappiz Editor");
 					controller.setStage(stage);
 

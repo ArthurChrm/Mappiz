@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="0.0" minWidth="0.0" prefHeight="545.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.selection_theme.SelectionThemeController">
+<BorderPane minHeight="0.0" minWidth="0.0" prefHeight="545.0" prefWidth="1130.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.selection_theme.SelectionThemeController_Editeur">
    <top>
       <GridPane BorderPane.alignment="CENTER">
          <columnConstraints>
