@@ -16,6 +16,7 @@ import org.omg.CORBA.Environment;
 
 import application.Theme;
 import application.Utile;
+import application.editeur.LancementEditeur;
 import application.selection_theme.SelectionThemeController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -193,6 +194,9 @@ public class AccueilController {
 	@FXML
 	private void clicEditeur(ActionEvent event) {
 		System.out.println("Clic éditeur");
+		LancementEditeur temp = new LancementEditeur();
+		temp.demarrage(stage);
+
 	}
 
 	@FXML

@@ -1,0 +1,1 @@
+Où se situe le socket du CPU ?
