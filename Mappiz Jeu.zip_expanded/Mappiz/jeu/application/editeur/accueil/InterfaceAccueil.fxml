@@ -19,6 +19,7 @@
 		<RowConstraints maxHeight="118.0" minHeight="0.0" percentHeight="50.0" prefHeight="95.0" vgrow="SOMETIMES" />
 		<RowConstraints maxHeight="136.0" minHeight="10.0" percentHeight="15.0" prefHeight="88.0" vgrow="SOMETIMES" />
 		<RowConstraints maxHeight="136.0" minHeight="10.0" percentHeight="15.0" prefHeight="88.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="136.0" minHeight="10.0" percentHeight="15.0" prefHeight="88.0" vgrow="SOMETIMES" />
 		<RowConstraints maxHeight="112.0" minHeight="10.0" percentHeight="15.0" prefHeight="59.0" vgrow="SOMETIMES" />
 		<RowConstraints maxHeight="83.0" minHeight="10.0" percentHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
 	</rowConstraints>
@@ -39,7 +40,7 @@
 				<Insets />
 			</GridPane.margin>
 		</Button>
-		<Button id="btn-negatif" fx:id="btnQuitter" alignment="CENTER" cancelButton="true" maxWidth="210.0" minWidth="210.0" mnemonicParsing="false" onAction="#clickQuitter" prefWidth="210.0" stylesheets="@../application.css" text="QUITTER" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+		<Button id="btn-negatif" fx:id="btnQuitter" alignment="CENTER" cancelButton="true" maxWidth="210.0" minWidth="210.0" mnemonicParsing="false" onAction="#clickQuitter" prefWidth="210.0" stylesheets="@../application.css" text="QUITTER" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
 			<font>
 				<Font name="Calibri" size="20.0" />
 			</font>
@@ -55,11 +56,16 @@
 				<Font name="Calibri" size="14.0" />
 			</font>
 		</Button>
-		<ImageView fx:id="imageVLogoUniv" fitHeight="106.0" fitWidth="338.0" onMouseClicked="#clickLogoUniv" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="4" GridPane.valignment="BOTTOM">
+		<ImageView fx:id="imageVLogoUniv" fitHeight="106.0" fitWidth="338.0" onMouseClicked="#clickLogoUniv" pickOnBounds="true" preserveRatio="true" GridPane.halignment="LEFT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
 			<GridPane.margin>
 				<Insets bottom="5.0" left="5.0" />
 			</GridPane.margin>
 		</ImageView>
 		<Button id="btn-ok" fx:id="btnModifierTheme" alignment="CENTER" contentDisplay="CENTER" maxWidth="210.0" minWidth="210.0" mnemonicParsing="false" onAction="#clickModifierUnTheme" prefWidth="210.0" stylesheets="@../application.css" text="MODIFIER UN THEME" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER" />
+      <Button id="btn-ok" fx:id="retourAccueil" alignment="CENTER" contentDisplay="CENTER" layoutX="505.0" layoutY="279.0" maxWidth="210.0" minWidth="210.0" mnemonicParsing="false" onAction="#retourAccueil" prefHeight="37.0" prefWidth="210.0" stylesheets="@../application.css" text="RETOUR A L'ACCUEIL" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+         <font>
+            <Font name="Calibri" size="20.0" />
+         </font>
+      </Button>
 	</children>
 </GridPane>

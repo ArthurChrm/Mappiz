@@ -10,6 +10,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Optional;
 import java.util.Scanner;
 
+import application.accueil.AccueilController;
 import application.editeur.Parametre_Editeur;
 import application.editeur.Theme_Editeur;
 import application.editeur.Utile_Editeur;
@@ -59,6 +60,9 @@ public class AccueilController_Editeur {
 
 	@FXML
 	private Button btnOptions;
+	
+	@FXML
+	private Button retourAccueil;
 
 	@FXML
 	private ImageView imageVLogoUniv;
@@ -321,6 +325,27 @@ public class AccueilController_Editeur {
 
 		Theme_Editeur.setUrlDossierDesThemes(urlDossierDesThemes);
 		Theme_Editeur.setNbMaxDeQuestions(nbMaxDeQuestionsParTheme);
+	}
+	
+	@FXML
+	private void retourAccueil() throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/accueil/InterfaceAccueil.fxml"));
+		Parent root = (Parent) loader.load();
+		AccueilController controller = (AccueilController) loader.getController();
+		controller.setStage(stage);
+
+		stage.setWidth(1300);
+		stage.setHeight(700);
+		stage.setResizable(false);
+
+		// création d'une Scene à partir de la Scene parent
+		Scene sceneCreationTheme = new Scene(root, 1200, 600);
+		sceneCreationTheme.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+
+		stage.setTitle("Mappiz");
+		stage.setScene(sceneCreationTheme);
+		
+		stage.show();
 	}
 
 }
