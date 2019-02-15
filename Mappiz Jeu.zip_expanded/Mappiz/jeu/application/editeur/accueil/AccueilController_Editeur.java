@@ -309,7 +309,6 @@ public class AccueilController_Editeur {
 		System.exit(0);
 	}
 	
-
 	private void enregistrerParametres(String urlDossierDesThemes, int nbMaxDeQuestionsParTheme, int nbMaxDeReponsesParQuestion) {
 		File paramsFile = new File("params.csv");
 		String params = urlDossierDesThemes + "|" + nbMaxDeQuestionsParTheme + "|" + nbMaxDeReponsesParQuestion;
