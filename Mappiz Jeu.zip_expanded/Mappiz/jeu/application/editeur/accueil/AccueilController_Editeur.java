@@ -57,13 +57,10 @@ public class AccueilController_Editeur {
 
 	@FXML
 	private Button btnQuitter;
-
-	@FXML
-	private Button btnOptions;
 	
 	@FXML
-	private Button retourAccueil;
-
+	private Button btnRetour;
+	
 	@FXML
 	private ImageView imageVLogoUniv;
 
@@ -72,8 +69,6 @@ public class AccueilController_Editeur {
 	@FXML
 	private void initialize() {
 		// Affichage d'une image sur le bouton Options
-		Image imageOptions = new Image(getClass().getResourceAsStream("img_options.png"));
-		btnOptions.setGraphic(new ImageView(imageOptions));
 
 		// Chargement du logo par le code, car lorsque le programme est exporté
 		// en jar
