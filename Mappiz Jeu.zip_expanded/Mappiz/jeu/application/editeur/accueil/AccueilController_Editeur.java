@@ -57,10 +57,10 @@ public class AccueilController_Editeur {
 
 	@FXML
 	private Button btnQuitter;
-	
+
 	@FXML
 	private Button btnRetour;
-	
+
 	@FXML
 	private ImageView imageVLogoUniv;
 
@@ -79,15 +79,19 @@ public class AccueilController_Editeur {
 		// On vérifier que le dossier des thèmes existe bien
 		File dossierDesThemes = new File(Theme_Editeur.getUrlDossierDesThemes());
 		while (!dossierDesThemes.exists()) {
-			String phrase = "Le dossier contenant les thèmes est introuvable. Il a été spécifié comme étant localisé à l'URL \"" + dossierDesThemes.getPath() + "\".\nPour continuer à utiliser l'application.editeur, vous devez sélectionner un dossier existant à partir de la fenêtre qui s'ouvrira après avoir cliqué sur \"OK\".";
-			Utile_Editeur.afficherDialogueDInformation("", "Dossier des thèmes introuvable !", phrase, AlertType.ERROR, 550);
+			String phrase = "Le dossier contenant les thèmes est introuvable. Il a été spécifié comme étant localisé à l'URL \""
+					+ dossierDesThemes.getPath()
+					+ "\".\nPour continuer à utiliser l'application.editeur, vous devez sélectionner un dossier existant à partir de la fenêtre qui s'ouvrira après avoir cliqué sur \"OK\".";
+			Utile_Editeur.afficherDialogueDInformation("", "Dossier des thèmes introuvable !", phrase, AlertType.ERROR,
+					550);
 
 			DirectoryChooser directoryChooser = new DirectoryChooser();
 			directoryChooser.setInitialDirectory(new File("."));
 			File dossierSelectionne = directoryChooser.showDialog(stage);
 
 			if (!(dossierSelectionne == null)) {
-				enregistrerParametres(dossierSelectionne.getPath(), Theme_Editeur.getNbMaxDeQuestions(), Theme_Editeur.getNbMaxDeReponses());
+				enregistrerParametres(dossierSelectionne.getPath(), Theme_Editeur.getNbMaxDeQuestions(),
+						Theme_Editeur.getNbMaxDeReponses());
 			}
 			dossierDesThemes = new File(Theme_Editeur.getUrlDossierDesThemes());
 		}
@@ -102,12 +106,15 @@ public class AccueilController_Editeur {
 
 	@FXML
 	private void clickLogoUniv() {
-		if (Utile_Editeur.afficherDialogueDeConfirmation("", "Site de Le Mans Université", "Souhaitez-vous consulter le site de Le Mans Université ?", "Oui", "Non")) {
+		if (Utile_Editeur.afficherDialogueDeConfirmation("", "Site de Le Mans Université",
+				"Souhaitez-vous consulter le site de Le Mans Université ?", "Oui", "Non")) {
 			if (Desktop.isDesktopSupported()) {
 				try {
 					Desktop.getDesktop().browse(new URI("http://www.univ-lemans.fr/fr/index.html"));
 				} catch (IOException | URISyntaxException e) {
-					Utile_Editeur.afficherDialogueDInformation("", "Erreur !", "Une erreur est survenue lors de l'ouverture de votre navigateur Internet.", AlertType.ERROR);
+					Utile_Editeur.afficherDialogueDInformation("", "Erreur !",
+							"Une erreur est survenue lors de l'ouverture de votre navigateur Internet.",
+							AlertType.ERROR);
 				}
 			}
 		}
@@ -116,7 +123,8 @@ public class AccueilController_Editeur {
 	@FXML
 	private void clickModifierUnTheme(ActionEvent event) throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/editeur/selection_theme/InterfaceSelectionTheme.fxml"));
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource("/application/editeur/selection_theme/InterfaceSelectionTheme.fxml"));
 		Parent root = (Parent) loader.load();
 		SelectionThemeController_Editeur controller = (SelectionThemeController_Editeur) loader.getController();
 		controller.setStage(stage);
@@ -131,10 +139,9 @@ public class AccueilController_Editeur {
 		stage.show();
 
 		/*
-		 * La fonction centerOnScreen(); ne centre pas correctement la fenêtre
-		 * dans l'écran Il est donc nécessaire de calculer manuellement les
-		 * coordonnées x et y de la fenêtre (APRES avoir appelé
-		 * primaryStage.show();)
+		 * La fonction centerOnScreen(); ne centre pas correctement la fenêtre dans
+		 * l'écran Il est donc nécessaire de calculer manuellement les coordonnées x et
+		 * y de la fenêtre (APRES avoir appelé primaryStage.show();)
 		 */
 		Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
 		stage.setX((primScreenBounds.getWidth() - stage.getWidth()) / 2);
@@ -145,7 +152,8 @@ public class AccueilController_Editeur {
 	@FXML
 	private void clickAjouterUnTheme(ActionEvent event) throws IOException {
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/editeur/creation_theme/InterfaceCreationTheme.fxml"));
+		FXMLLoader loader = new FXMLLoader(
+				getClass().getResource("/application/editeur/creation_theme/InterfaceCreationTheme.fxml"));
 		Parent root = (Parent) loader.load();
 		CreationThemeController controller = (CreationThemeController) loader.getController();
 		controller.setStage(stage); // or what you want to do
@@ -211,11 +219,13 @@ public class AccueilController_Editeur {
 			// dossier
 			Button btnParcourir = new Button("...");
 			Spinner<Integer> spinnerNbMaxDeQuestions = new Spinner<Integer>();
-			spinnerNbMaxDeQuestions.setValueFactory(new IntegerSpinnerValueFactory(5, 200, paramsActuels.nbMaxDeQuestions));
+			spinnerNbMaxDeQuestions
+					.setValueFactory(new IntegerSpinnerValueFactory(5, 200, paramsActuels.nbMaxDeQuestions));
 			spinnerNbMaxDeQuestions.setMaxWidth(60);
 
 			Spinner<Integer> spinnerNbMaxDeReponses = new Spinner<Integer>();
-			spinnerNbMaxDeReponses.setValueFactory(new IntegerSpinnerValueFactory(1, 26, paramsActuels.nbMaxDeReponses));
+			spinnerNbMaxDeReponses
+					.setValueFactory(new IntegerSpinnerValueFactory(1, 26, paramsActuels.nbMaxDeReponses));
 			spinnerNbMaxDeReponses.setMaxWidth(60);
 
 			// Gérer la sélection d'un dossier
@@ -278,7 +288,8 @@ public class AccueilController_Editeur {
 				@Override
 				public Parametre_Editeur call(ButtonType b) {
 					if (b == buttonTypeOk) {
-						return new Parametre_Editeur(textFDossierThemes.getText(), spinnerNbMaxDeQuestions.getValue(), spinnerNbMaxDeReponses.getValue());
+						return new Parametre_Editeur(textFDossierThemes.getText(), spinnerNbMaxDeQuestions.getValue(),
+								spinnerNbMaxDeReponses.getValue());
 					}
 					return null;
 				}
@@ -289,7 +300,8 @@ public class AccueilController_Editeur {
 			if (parametreOpt.isPresent()) {
 				Parametre_Editeur parametre = parametreOpt.get();
 
-				enregistrerParametres(parametre.urlDossierDesThemes, parametre.nbMaxDeQuestions, parametre.nbMaxDeReponses);
+				enregistrerParametres(parametre.urlDossierDesThemes, parametre.nbMaxDeQuestions,
+						parametre.nbMaxDeReponses);
 				btnModifierTheme.setDisable(Theme_Editeur.listerLesThemes().length == 0);
 			}
 		} catch (IOException e) {
@@ -303,8 +315,9 @@ public class AccueilController_Editeur {
 		Platform.exit();
 		System.exit(0);
 	}
-	
-	private void enregistrerParametres(String urlDossierDesThemes, int nbMaxDeQuestionsParTheme, int nbMaxDeReponsesParQuestion) {
+
+	private void enregistrerParametres(String urlDossierDesThemes, int nbMaxDeQuestionsParTheme,
+			int nbMaxDeReponsesParQuestion) {
 		File paramsFile = new File("params.csv");
 		String params = urlDossierDesThemes + "|" + nbMaxDeQuestionsParTheme + "|" + nbMaxDeReponsesParQuestion;
 
@@ -321,7 +334,7 @@ public class AccueilController_Editeur {
 		Theme_Editeur.setUrlDossierDesThemes(urlDossierDesThemes);
 		Theme_Editeur.setNbMaxDeQuestions(nbMaxDeQuestionsParTheme);
 	}
-	
+
 	@FXML
 	private void retourAccueil() throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/application/accueil/InterfaceAccueil.fxml"));
@@ -335,11 +348,12 @@ public class AccueilController_Editeur {
 
 		// création d'une Scene à partir de la Scene parent
 		Scene sceneCreationTheme = new Scene(root, 1200, 600);
-		sceneCreationTheme.getStylesheets().add(getClass().getResource("/application/application.css").toExternalForm());
+		sceneCreationTheme.getStylesheets()
+				.add(getClass().getResource("/application/application.css").toExternalForm());
 
 		stage.setTitle("Mappiz");
 		stage.setScene(sceneCreationTheme);
-		
+
 		stage.show();
 	}
 
